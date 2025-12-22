@@ -1,0 +1,5 @@
+# Edge dependencies
+requests
+rpi_ws281x
+RPi.GPIO
+youtube-search
