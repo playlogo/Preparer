@@ -8,7 +8,7 @@ from spotify_scraper import SpotifyClient
 from youtube_search import YoutubeSearch
 import os
 import shutil
-
+import functools
 
 # import led
 import utils
@@ -132,9 +132,11 @@ async def handle_activation():
         # Find youtube url
         results = await loop.run_in_executor(
             None,
-            YoutubeSearch,
-            track_name + " " + track_artist + " lyrics",
-            max_results=10,
+            functools.partial(
+                YoutubeSearch,
+                track_name + " " + track_artist + " lyrics",
+                max_results=10,
+            ),
         ).to_dict()
         video_URL = "https://youtube.com" + results[0]["url_suffix"]
 
