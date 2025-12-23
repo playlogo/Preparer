@@ -67,7 +67,7 @@ async def handle_activation():
     while True:
         try:
             res = subprocess.run(
-                ["/usr/bin/lsblk"], capture_output=True, text=True
+                ["/usr/bin/lsblk", "-f"], capture_output=True, text=True
             ).stdout
 
             if not "0403-0201" in res:
