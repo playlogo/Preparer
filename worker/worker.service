@@ -1,15 +1,13 @@
 [Unit]
 Description="Worker"
-After=network.target
-After=sound.target
 StartLimitIntervalSec=0
 
 [Service]
 Type=simple
 Restart=always
 RestartSec=10
-WorkingDirectory=/home/pi/Preparer/worker/
-ExecStart=/home/pi/Preparer/worker/run.sh
+WorkingDirectory=/home/playlogo/Preparer/worker/
+ExecStart=/home/playlogo/Preparer/worker/run.sh
 
 [Install]
 WantedBy=default.target
