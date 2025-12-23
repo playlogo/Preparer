@@ -208,6 +208,5 @@ async def main():
 
 if __name__ == "__main__":
     # task_leds = asyncio.create_task(led.runner(STATE))
-    task_main = asyncio.create_task(main())
     # asyncio.run(task_leds, task_main)
-    asyncio.run(task_main)
+    asyncio.run(main())
