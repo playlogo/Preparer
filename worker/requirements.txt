@@ -3,3 +3,4 @@ requests
 rpi_ws281x
 RPi.GPIO
 youtube-search
+spotifyscraper
