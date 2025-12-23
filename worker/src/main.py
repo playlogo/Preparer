@@ -137,7 +137,8 @@ async def handle_activation():
                 track_name + " " + track_artist + " lyrics",
                 max_results=10,
             ),
-        ).to_dict()
+        )
+        results = results.to_dict()
         video_URL = "https://youtube.com" + results[0]["url_suffix"]
 
         print("URL for" + video_URL)
