@@ -15,19 +15,23 @@ strip.begin()
 import time
 import math
 
-delay = 0.01
+delay = 0.001
 while True:
-    for i in range(128 * 10):
-        strip.setPixelColor(
-            math.floor(i / 10), Color(25 * (i % 128), 25 * (i % 128), 25 * (i % 128))
-        )
-        strip.show()
-        time.sleep(delay)
+    for i in range(128):
+        for brightness in range(10):
+            strip.setPixelColor(
+                i, Color(25 * brightness, 25 * brightness, 25 * brightness)
+            )
+            strip.show()
+            time.sleep(delay)
 
-    for i in range(128 * 10):
-        strip.setPixelColor(
-            math.floor(i / 10),
-            Color(255 - 25 * (i % 128), 255 - 25 * (i % 128), 255 - 25 * (i % 128)),
-        )
-        strip.show()
-        time.sleep(delay)
+    for i in range(128):
+        for brightness in range(10):
+            strip.setPixelColor(
+                i,
+                Color(
+                    255 - 25 * brightness, 255 - 25 * brightness, 255 - 25 * brightness
+                ),
+            )
+            strip.show()
+            time.sleep(delay)
