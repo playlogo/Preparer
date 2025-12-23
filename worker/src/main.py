@@ -144,12 +144,16 @@ async def handle_activation():
         print("URL for" + video_URL)
 
         # Download using ytdlp
-        await asyncio.create_subprocess_shell(
+        proc = await asyncio.create_subprocess_shell(
             "./yt-dlp_linux_aarch64 -f bestaudio -x --audio-format mp3 --no-playlist -o 'out.mp3' '"
             + video_URL
             + "'",
             cwd="/home/playlogo",
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
         )
+
+        stdout, stderr = await proc.communicate()
 
         print("Downlaoded")
 
@@ -162,7 +166,8 @@ async def handle_activation():
             + "_"
             + track_name
             + "_"
-            + track_artist,
+            + track_artist
+            + ".mp3",
         )
         print("Copied")
 
