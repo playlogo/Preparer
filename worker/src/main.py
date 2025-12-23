@@ -110,7 +110,9 @@ async def handle_activation():
 
     # Extract tracks from playlist
     client = SpotifyClient()
-    playlist = await loop.run_in_executor(None, client.get_playlist_info, playlistURL)
+    playlist = await loop.run_in_executor(
+        None, client.get_playlist_info, playlistURL.replace('"', "")
+    )
     tracks_count = playlist.get("track_count", 0)
 
     print("Found Tracks" + tracks_count)
