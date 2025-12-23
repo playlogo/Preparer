@@ -39,6 +39,7 @@ def run():
                 )
                 strip.show()
                 time.sleep(delay)
+        break
 
 
 run()
