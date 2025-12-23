@@ -41,7 +41,7 @@ async def init01_wifi():
 
             if len(res) == 0:
                 print("[init01] Not connected to wifi")
-                asyncio.sleep(3)
+                await asyncio.sleep(3)
             else:
                 print("[init01] Connected to wifi")
                 break
@@ -70,9 +70,9 @@ async def handle_activation():
                 ["/usr/bin/lsblk"], capture_output=True, text=True
             ).stdout
 
-            if "sda1" in res:
+            if not "sda1" in res:
                 print("[handler] Not plugged in")
-                asyncio.sleep(3)
+                await asyncio.sleep(3)
             else:
                 print("[handler] Found usb stick")
                 break
@@ -179,7 +179,7 @@ async def main():
     ip = utils.get_ip()
     print("IP" + ip)
     STATE = {"DISPLAY": "IP", "VALUE": ip}
-    await asyncio.sleep(10)
+    # await asyncio.sleep(10)
 
     # Turn off display and wait for activation
     while True:
