@@ -13,15 +13,21 @@ strip = PixelStrip(
 strip.begin()
 
 import time
+import math
 
 delay = 0.01
 while True:
-    for i in range(128):
-        strip.setPixelColor(i, Color(255, 255, 255))
+    for i in range(128 * 10):
+        strip.setPixelColor(
+            math.floor(i / 10), Color(25 * (i % 128), 25 * (i % 128), 25 * (i % 128))
+        )
         strip.show()
         time.sleep(delay)
 
-    for i in range(128):
-        strip.setPixelColor(i, Color(0, 0, 0))
+    for i in range(128 * 10):
+        strip.setPixelColor(
+            math.floor(i / 10),
+            Color(255 - 25 * (i % 128), 255 - 25 * (i % 128), 255 - 25 * (i % 128)),
+        )
         strip.show()
         time.sleep(delay)
