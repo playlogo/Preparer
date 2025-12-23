@@ -115,7 +115,7 @@ async def handle_activation():
     )
     tracks_count = playlist.get("track_count", 0)
 
-    print("Found Tracks" + tracks_count)
+    print("Found Tracks" + str(tracks_count))
 
     # Loop over tracks
     current = 0
@@ -155,7 +155,7 @@ async def handle_activation():
             "/home/playlogo/out.mp3",
             mount_point
             + "/"
-            + ("" + current).zfill(len("" + current))
+            + str(current).zfill(len(str(tracks_count)))
             + "_"
             + track_name
             + "_"
