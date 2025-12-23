@@ -70,7 +70,7 @@ async def handle_activation():
                 ["/usr/bin/lsblk"], capture_output=True, text=True
             ).stdout
 
-            if not "sda1" in res:
+            if not "0403-0201" in res:
                 print("[handler] Not plugged in")
                 await asyncio.sleep(3)
             else:
@@ -81,24 +81,27 @@ async def handle_activation():
             print(err)
 
     # Mount usb stick
-    device = "/dev/sda1"
-    mount_point = "/mnt/usbstick"
+    mount_point = "/home/playlogo/mount"
     try:
         os.makedirs(mount_point, exist_ok=True)
-        subprocess.run(["/usr/bin/mount", device, mount_point], check=True)
+        subprocess.run(["/usr/bin/mount", "/home/playlogo/mount"], check=True)
     except Exception as err:
         print(err)
 
     # TODO: Empty dir - Improve not needed
     STATE = {"DISPLAY": "DELETING"}
 
-    try:
-        await loop.run_in_executor(None, shutil.rmtree, mount_point + "/")
-        print(f"Directory '{mount_point}' and its contents have been deleted.")
-    except FileNotFoundError:
-        print(f"Directory '{mount_point}' not found.")
-    except OSError as e:
-        print(f"Error: {e.filename} - {e.strerror}")
+    for filename in os.listdir(mount_point):
+        file_path = os.path.join(mount_point, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print(f"Failed to delete {file_path}. Reason: {e}")
+
+    print(f"Directory '{mount_point}' and its contents have been deleted.")
 
     # Request playlist url
     STATE = {"DISPLAY": "SPOTIFY"}
